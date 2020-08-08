@@ -141,5 +141,3 @@ ENTRY IN MANIFEST FILE
             value: false
 ```
 
-
-

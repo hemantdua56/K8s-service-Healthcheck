@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta http-equiv="refresh" content="15">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136966345-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-136966345-1');
+    </script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $('#table_id td.code').each(function(){
+        if ($(this).text() == "200") {
+          $(this).css('background-color','#9ECD16');
+        }
+        if ($(this).text() != "200") {
+            $(this).css('background-color','#FF5858');
+        }
+    });
+});
+
+</script>
+   <title>Health-report</title>
+   <link href="static/bootstrap.min.css" rel="stylesheet">
+   <style>
+     table, th, td {
+        border: 2px solid black;
+     }
+     table {
+       width: 100%;
+       border: 1;
+       margin: auto;
+     }
+     thead {
+        background: black;
+        color:#fff;
+      }
+     th {
+       padding: 5px;
+     }
+   </style>
+ </head>
+ <body>
+   <div id="container">
+     <div class="jumbotron">
+       <h2><center>GLP Health Report</center></h2>
+     </div>
+     <div id="main">
+
+<table id="table_id" style="border-collapse: collapse;">
+                    <!-- Table header -->
+
+                    <thead>
+                    <tr>
+                        <th scope="col">Microservice</th>
+                        <th scope="col">INT</th>
+                        <th scope="col">Health</th>
+
+                     
+                    </tr>
+                    </thead>
+
+                    <!-- Table body -->
+
+                    <tbody>
+                    {{ range . }}
+                    <tr>
+                        <td style="font-weight:bold">{{ .Microservice  }}</td>
+                        <td>{{ .BsInt }}</td>
+                        <td class="code">{{ .HealthInt }}</td>
+
+                     
+                    </tr>
+                    {{ end }}
+                    </tbody>
+
+                </table>
+     </div>
+   </div>
+ </body>
+</html>
