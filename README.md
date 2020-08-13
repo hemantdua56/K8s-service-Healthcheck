@@ -116,5 +116,3 @@ spec:
           serviceName: healthchecker
           servicePort: 80
 ```
-
-
