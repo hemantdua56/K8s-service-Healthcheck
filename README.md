@@ -61,14 +61,14 @@ spec:
             cpu: 1000m
             memory: 2048Mi
         env:
-        - secret: smtp-user
+        - secret: SMTP-USER
           value: smtp/smtp-user
-        - secret: smtp-pass
+        - secret: SMTP-PASS
           value: smtp/smtp-pass
         #For email notification add a secret smtp in environment with user smtp-user and password smtp-pass
         - name: alert
           value: false
-        - name: namespace
+        - name: NAMESPACE
           valueFrom:
             fieldRef:
               apiVersion: v1
@@ -116,30 +116,5 @@ spec:
           serviceName: healthchecker
           servicePort: 80
 ```
-
-###### BITESIZE Steps
-#
-ENTRY IN MANIFEST FILE
-```
-- name: healthcheck
-        ssl: false
-        port: 8080
-        application: healthcheck
-        limits:
-          memory: 2048Mi
-        replicas: 1
-        env:
-          - name: namespace
-            value: int
-          #Change the namespace accordingly
-          - secret: smtp-user
-            value: smtp/smtp-user
-          - secret: smtp-pass
-            value: smtp/smtp-pass
-          #For email notification add a secret smtp in environment with user smtp-user and password smtp-pass
-          - name: alert
-            value: false
-```
-
 
 

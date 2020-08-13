@@ -1,0 +1,15 @@
+namespace: "$NAMESPACE"
+smtpUser: "$SMTP_USER"
+smtpPass: "$SMTP_PASS"
+sender: "sns@alerts.zxc.com"
+recipientList: "'asd@gmail.com','qwe@gmail.com'"
+alert: 
+microservice:
+      - service: "abc"
+        port: 9999
+        context_path: "abc" #No need to add /abc 
+        path: "/health"
+      - service: "xyz"
+        port: 9999
+        context_path: "xyz"
+        path: "/health"
