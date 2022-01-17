@@ -59,8 +59,8 @@ $(document).ready(function(){
                     <thead>
                     <tr>
                         <th scope="col">Microservice</th>
-                        <th scope="col">INT</th>
-                        <th scope="col">Health</th>
+                        <th scope="col">Build</th>
+                        <th scope="col">Health Status</th>
 
                      
                     </tr>
@@ -72,8 +72,8 @@ $(document).ready(function(){
                     {{ range . }}
                     <tr>
                         <td style="font-weight:bold">{{ .Microservice  }}</td>
-                        <td>{{ .BsInt }}</td>
-                        <td class="code">{{ .HealthInt }}</td>
+                        <td>{{ .Build }}</td>
+                        <td class="code">{{ .HealthStatus }}</td>
 
                      
                     </tr>

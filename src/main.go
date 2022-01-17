@@ -8,6 +8,8 @@ import (
         "sync"
         "html/template"
         "encoding/json"
+        // c "healthcheck/src/config"
+        "github.com/spf13/viper"
     )
   var (
         err error
@@ -24,12 +26,28 @@ type Data struct {
 
 type Diff struct{
       Microservice string
-      BsInt string
+      Build string
+      HealthStatus string
 
 }
 
 
 func main() {
+
+    // Set the file name of the configurations file
+    viper.SetConfigName("config")
+
+    // Set the path to look for the configurations file
+    viper.AddConfigPath(".")
+
+    // Enable VIPER to read Environment Variables
+    viper.AutomaticEnv()
+
+    viper.SetConfigType("yml")  
+    
+    if err := viper.ReadInConfig(); err != nil {
+      log.Printf("Error reading config file, %s", err)
+    }
 
     templ, err = templ.ParseGlob("templates/*.html")
     log.Println(templ)
@@ -55,8 +73,9 @@ func main() {
          return
        }
        //var dt []Diff
-       temp := [<NUMBER of ENVIRONEMTNES>][]Data{}
-       urls := []string{"https://<ENV_URL>/healthcheck"}
+       var urls = viper.GetStringSlice("urls")
+
+       var temp = [1][]Data{}
        var wg sync.WaitGroup
        wg.Add(len(urls))
 
@@ -89,6 +108,7 @@ func main() {
                   }
                   log.Printf("sakura response: %q", body)
                   log.Println(url)
+
 					result := make([]Data, 50)
                  	temp[i] = result
                   //return jsonErr
@@ -104,7 +124,7 @@ func main() {
        var dt []Diff
        
        for i := 0; i < len(temp[0]); i++ {
-             dt = append(dt, Diff{Microservice: temp[0][i].Microservice,<ENV NAME>: temp[0][i].Build, Health<ENV NAME>: temp[0][i].Healthcode })
+             dt = append(dt, Diff{Microservice: temp[0][i].Microservice,Build: temp[0][i].Build, HealthStatus: temp[0][i].Healthcode })
        }
 
        log.Println(dt)
