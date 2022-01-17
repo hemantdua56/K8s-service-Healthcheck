@@ -8,7 +8,8 @@ image:
   repository:  056640875000.dkr.ecr.us-east-1.amazonaws.com/ecp-healthchecker
   pullPolicy: Always
   # Overrides the image tag whose default is the chart version.
-  tag: backend
+  backendTag: backend
+  frontendTag: frontend
 
 imagePullSecrets: []
 nameOverride: ""
@@ -38,7 +39,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8080
+  port: 8000
 
 ingress:
   enabled: false
