@@ -1,0 +1,24 @@
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ include "healthcheck-backend.fullname" . }}-role
+rules:
+  - apiGroups: ["apps"]
+    resources: ["pods","deployments"]
+    verbs: ["get", "watch", "list"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: healthcheckrolebinding
+  namespace: {{ .Values.namespace }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "healthcheck-backend.fullname" . }}
+    namespace: {{ .Values.namespace }}
+roleRef:
+  kind: ClusterRole
+  name: {{ include "healthcheck-backend.fullname" . }}-role
+  apiGroup: rbac.authorization.k8s.io

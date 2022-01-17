@@ -5,11 +5,7 @@ sender: "sns@alerts.zxc.com"
 recipientList: "'asd@gmail.com','qwe@gmail.com'"
 alert: 
 microservice:
-      - service: "abc"
-        port: 9999
-        context_path: "abc" #No need to add /abc 
-        path: "/health"
-      - service: "xyz"
-        port: 9999
-        context_path: "xyz"
-        path: "/health"
+      - service: "nginx"
+        port: 80
+        context_path: "" #No need to add /abc 
+        path: "/"

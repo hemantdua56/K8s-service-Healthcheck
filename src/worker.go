@@ -61,9 +61,11 @@ func worker(Services c.Service ){
 					  }
 
 
+
 					  //Multi threading all the request for all microservices
 					  var wg sync.WaitGroup
 					  wg.Add(len(Services.Microservice))
+					  fmt.Println(Services)
 
 					  for i := 0; i < len(Services.Microservice); i++ {
 					  go func(i int) {
@@ -75,7 +77,7 @@ func worker(Services c.Service ){
 						//   fmt.Println(t)
 
 						  //getting build version
-						  deployment, err := clientset.AppsV1().Deployments(viper.GetString("namespace")).Get(Services.Microservice[i].Service,metav1.GetOptions{})
+						    deployment, err := clientset.AppsV1().Deployments(viper.GetString("namespace")).Get(Services.Microservice[i].Service,metav1.GetOptions{})
 							  if err != nil {
 										fmt.Println(err.Error())
 										fallback, errr := clientset.AppsV1().Deployments(viper.GetString("namespace")).Get("healthcheck",metav1.GetOptions{})
