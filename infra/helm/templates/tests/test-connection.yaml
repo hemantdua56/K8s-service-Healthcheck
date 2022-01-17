@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "healthchecker.fullname" . }}-test-connection"
+  labels:
+    {{- include "healthchecker.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "healthchecker.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
