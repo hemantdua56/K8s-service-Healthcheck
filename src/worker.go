@@ -121,12 +121,14 @@ func worker(Services c.Service ){
 						  }
 
 						  //
-						  if x[Services.Microservice[i].Service]==60 && viper.GetString("alert")=="true" {
+						  if x[Services.Microservice[i].Service]==viper.GetInt("initialCycle") && viper.GetString("alert")=="true" {
+							      var recipientList = viper.GetStringSlice("recipientList")
+								  fmt.Println(recipientList)
 								  m := gomail.NewMessage()
 								  m.SetHeader("From", viper.GetString("sender"))
-								  m.SetHeader("To", viper.GetString("recipientList"))
-								  m.SetHeader("Subject", "DOWN DOWN DOWN!")
-								  m.SetBody("text/html", fmt.Sprintf("Hello %s is Down on %s environment!", Services.Microservice[i].Service, viper.GetString("namespace")))
+								  m.SetHeader("To", recipientList... )
+								  m.SetHeader("Subject", "ECP Health Dashboard Alert!")
+								  m.SetBody("text/html", fmt.Sprintf("Hi Team, %s is Down on %s environment!. For Current status please use this link : %s", Services.Microservice[i].Service, viper.GetString("namespace"),viper.GetString("dashboardEndpoint")))
 
 								  d := gomail.NewDialer("email-smtp.us-east-1.amazonaws.com", 587, viper.GetString("smtpUser"), viper.GetString("smtpPass"))
 
@@ -134,7 +136,7 @@ func worker(Services c.Service ){
 								  if err := d.DialAndSend(m); err != nil {
 									  panic(err)
 								  }
-								  x[Services.Microservice[i].Service]=-120
+								  x[Services.Microservice[i].Service]=-2 * viper.GetInt("initialCycle")
 						  }
 
 						  //rendering output
