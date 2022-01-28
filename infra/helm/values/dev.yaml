@@ -79,19 +79,19 @@ tolerations: []
 
 affinity: {}
 
-namespace: "<NAMESPACE>"
+namespace: "<NAMESPACE>"  # Namespace in Which you want to deploy the healthchecker
 
 config: |
-    namespace: "$NAMESPACE"
-    smtpUser: "<SMTP USER>"
-    smtpPass: "<SMTP PASSWORD>"
+    namespace: "$NAMESPACE"  
+    smtpUser: "<SMTP USER>"  # SMTP user for Alerts
+    smtpPass: "<SMTP PASSWORD>"  
     sender: "alerts@heal.com"
     recipientList: [mail@xyz.com,test@gmail.com]
-    dashboardEndpoint: "<DASHBOARD ENDPOINT>"
-    alert: true
-    initialCycle: 90
+    dashboardEndpoint: "<DASHBOARD ENDPOINT>"   # The Dashboard endpoint From where you will be accessing the UI
+    alert: true                     # Default Alerts are disable i.e false
+    initialCycle: 90                 # After initialCycle number of cycle the dashboard will through the alert
     microservice:
-      - service: "nginx"
+      - service: "nginx"              # Service details which you want to monitor
         port: 80
         context_path: "" #No need to add /abc 
         path: "/"h"

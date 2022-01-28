@@ -29,12 +29,12 @@ prerequisites
 
 ### Follow the below steps
 
-1. Create a values file as infra/helm/values/<ENV>.yaml
+1. Create a values file as infra/helm/values/{ENV}.yaml and update the values as described in infra/helm/values/dev.yaml
 
 2. Run below commands from the terminal from where you can access the K8s cluster
 ```shell
 git clone $this_repo
 # From the root project
-helm upgrade --install  healthchecker -f infra/helm/values/<ENV>.yaml ./infra/helm/
+helm upgrade --install  healthchecker -f infra/helm/values/{ENV}.yaml ./infra/helm/
 ```
 
