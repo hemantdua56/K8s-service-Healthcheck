@@ -2,7 +2,7 @@
 
 [![N|Solid](https://img.icons8.com/color/48/000000/golang.png)]() Golang app
 
-GLP health checker is an application to generate report on health status of all deployed microservices for the ECP environments.
+health checker is an application to generate report on health status of all deployed microservices for the K8s environments.
 
 
   - UI is in Front-end Branch
